@@ -65,6 +65,7 @@ class ReplayTutor2(Tutor):
         self.outcome = None
         self.skillbox = None
         self.button = None
+        self.import_button = None
         self.kt_button = None
         self.attr_name = None
         self.attr_value = None
@@ -86,10 +87,8 @@ class ReplayTutor2(Tutor):
     
         #menu
         menubar = Menu(self.root)
-        filemenu = Menu(menubar, tearoff=0)
-        filemenu.add_command(label="Import Datashop File", command=self.import_datashop_file)
-        filemenu.add_command(label="Quit", command=self.root.quit)
-        menubar.add_cascade(label="File", menu=filemenu)
+        menubar.add_command(label="Import Datashop File", command=self.import_datashop_file)
+        menubar.add_command(label="Quit", command=self.root.quit)
         self.root.config(menu=menubar)
         
         #listbox
@@ -174,6 +173,10 @@ class ReplayTutor2(Tutor):
         self.button = Button(self.root, text="Send", command=self.submit_transaction, state=DISABLED)
         self.button.pack()
 
+        #Load button
+        self.import_button = Button(self.root, text="Import", command=self.import_datashop_file)
+        self.import_button.pack()
+
         #spacer frame
         separator = Frame(height=2, bd=1, relief=SUNKEN)
         separator.pack(fill=X, padx=5, pady=5)
@@ -202,8 +205,8 @@ class ReplayTutor2(Tutor):
         b = Button(leftframe, text="Get", command=self.get_attribute)
         b.pack()
         
-        #b = Button(leftframe, text="Add Problem", command=self.add_problem)
-        #b.pack()
+        b = Button(leftframe, text="Add Problem", command=self.add_problem)
+        b.pack()
         
         #kt_trace
         w = Label(rightframe, text="Skill ID")
@@ -361,6 +364,7 @@ class ReplayTutor2(Tutor):
         self.session_id.insert(INSERT,str(self.session_id_value))
         
         self.button.config(state=NORMAL)
+        self.import_button.config(state=NORMAL)
         self.attr_button.config(state=NORMAL)
         self.kt_button.config(state=NORMAL)
     
@@ -394,14 +398,14 @@ class ReplayTutor2(Tutor):
 
 if __name__ == "__main__":
     #localhost
-    entity_id = "ed188aa3-a673-4482-9475-aedd981ff360"
-    app_secret = "e992a697f396a2fd99ef9910cb040fa9"
-    url_root = "http://localhost:8000"
+    # entity_id = "ed188aa3-a673-4482-9475-aedd981ff360"
+    # app_secret = "e992a697f396a2fd99ef9910cb040fa9"
+    # url_root = "http://localhost:8000"
     
-    #production (tres)
-    #entity_id = "e7e43470-5031-496c-9972-cbb809455333"
-    #app_secret = "1aadb263acec65c24b683976643516ce"
-    #url_root = "http://www.hpit-project.org"
+    # production (tres)
+    entity_id = "e7e43470-5031-496c-9972-cbb809455333"
+    app_secret = "1aadb263acec65c24b683976643516ce"
+    url_root = "http://www.hpit-project.org"
     
     #production (prod)
     #entity_id = "35f8fdda-7f4e-4b48-86ab-eda038186183"
